@@ -1,0 +1,10 @@
+#aws lambda code to get bucket name , filename , and pass them as arguments to aws glue job
+
+import json
+import boto3
+def lambda_handler(event, context):
+    #retriveing Records
+    buck_name=event['Records'][0]['s3']['bucket']['name']
+    file_name=event['Records'][0]['s3']['object']['key']
+    client=boto3.client('glue')
+    response=client.start_job_run(JobName="lambdagluejob",Arguments={'--buck':buck_name,'--file':file_name})
