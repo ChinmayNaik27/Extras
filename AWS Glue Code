@@ -1,0 +1,24 @@
+#AWS Glue Code..
+#practice..
+#covid data Code 
+
+import sys
+from awsglue.transforms import *
+from awsglue.utils import getResolvedOptions
+from pyspark.context import SparkContext
+from awsglue.context import GlueContext
+from awsglue.job import Job
+from pyspark.sql import *
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+
+## @params: [JOB_NAME]
+spark = SparkSession.builder.getOrCreate()
+args = getResolvedOptions(sys.argv, ['file','buck'])
+file_name=args['file']
+bucket_name=args['buck']
+input_1="s3a://{}/{}".format(bucket_name,file_name)
+output="s3a://{}/{}".format(bucket_name,'lambdaglue/output')
+df=spark.read.format('csv').option('header','true').option('inferSchema','true').load(input_1)
+res=df.where(col('Deaths')>=3)
+res.write.mode("append").format("csv").option('header','true').save(output)
