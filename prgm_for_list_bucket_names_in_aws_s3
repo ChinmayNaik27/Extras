@@ -1,0 +1,15 @@
+
+#program to check the buckets in s3 
+import json
+import boto3
+def lambda_handler(event, context):
+    # TODO implement
+    print(1)
+    #using S3
+    s3=boto3.resource('s3')
+    for bucket in s3.buckets.all():
+        print(bucket.name)
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
