@@ -4,7 +4,7 @@ import json
 import boto3
 def lambda_handler(event, context):
     # TODO implement
-    print(1)
+    print(1)                        #this just prints 1 in testing
     #using S3
     s3=boto3.resource('s3')
     for bucket in s3.buckets.all():
