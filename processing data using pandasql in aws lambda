@@ -1,0 +1,29 @@
+#processing data using pandasql in aws lambda
+import json
+import boto3
+import pandas as pd
+import s3fs
+import fsspec
+import pandasql as p
+def lambda_handler(event, context):
+    # TODO implement
+    print(1)
+    s3 = boto3.client('s3')
+    data='s3://chinmay2022/demo1/asl.csv'
+    df=pd.read_csv(data)
+    print(df)
+    res=df.query("age>= 30")
+    # res1=df.query("")
+    print(res)
+    res1=pd.merge(df,res,on='name')
+    print("----------------")
+    print(res1)
+    res1=p.sqldf("select * from res")
+    print("res1")
+    res2=p.sqldf("select * from df")
+    print(res2)
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
