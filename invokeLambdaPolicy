@@ -1,0 +1,19 @@
+#to use one lambda function in another
+
+#to use we have to add the policy for the nested / parent function / the function which is the main function 
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:InvokeFunction",
+                "lambda:InvokeAsync"
+            ],
+            "Resource": "arn:aws:lambda:ap-south-1:611072831785:function:ChildFunction"
+        }
+    ]
+}
