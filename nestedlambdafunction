@@ -1,0 +1,45 @@
+#calling one lambda funtion from other lambda function
+
+
+import boto3
+ 
+# Define the client to interact with AWS Lambda
+client = boto3.client('lambda')
+ 
+def lambda_handler(event,context):
+     #calling the lambda childfunction function
+     response = client.invoke(
+        FunctionName = 'arn:aws:lambda:ap-south-1:611072831785:function:ChildFunction',
+        InvocationType = 'RequestResponse')
+    print("This is nested Lambda ")
+
+"""#code2
+#if code2 of child class is used then uncomment this
+
+import json
+import boto3
+ 
+# Define the client to interact with AWS Lambda
+client = boto3.client('lambda')
+ 
+def lambda_handler(event,context):
+ 
+    # Define the input parameters that will be passed
+    # on to the child function
+    inputParams = {
+        "ProductName"   : "iPhone SE",
+        "Quantity"      : 2,
+        "UnitPrice"     : 499
+    }
+ 
+    response = client.invoke(
+        FunctionName = 'arn:aws:lambda:eu-west-1:890277245818:function:ChildFunction',
+        InvocationType = 'RequestResponse',
+        Payload = json.dumps(inputParams)
+    )
+ 
+    responseFromChild = json.load(response['Payload'])
+ 
+    print('\n')
+    print(responseFromChild)
+    """
