@@ -1,0 +1,23 @@
+#AWS Lambda program to fetch filename automatically and read the data from files using aws triggers
+
+import json
+import pandas as pd
+import s3fs
+from datetime import datetime as dt
+def lambda_handler(event, context):
+    # TODO implement
+    of=dt.today()
+    bucket_name=event['Records'][0]['s3']['bucket']['name']
+    file_name=event['Records'][0]['s3']['object']['key']
+    print(bucket_name)
+    print(file_name)
+    df=pd.read_csv("s3://{}/{}".format(bucket_name,file_name))
+    print(df)
+    res=df[(df['age']>=30) & (df['city']=='blr')]
+    print(res)
+    res.to_csv("s3://{}/taskoutput/{}".format(bucket_name,of))
+    op+=1
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
