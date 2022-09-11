@@ -17,3 +17,6 @@
         }
     ]
 }
+
+#if we want to make the policy applicable for all buckets use "*" instead of "arn:aws:lambda:ap-south-1:611072831785:function:ChildFunction"
+#eg: "Resource": "*"
