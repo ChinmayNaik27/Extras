@@ -32,7 +32,10 @@ import boto3
 # Define the client to interact with AWS Lambda
 
 def lambda_handler(event,context):
- 
+    #storing the input from 1st lambda function into variables
+    pName = event['ProductName']
+    qty   = event['TransactionID']
+    amt   = event['Amount']
     # Define the input parameters that will be passed
     # on to the child function
     inputParams = {
@@ -40,7 +43,12 @@ def lambda_handler(event,context):
         "Quantity"      : 2,
         "UnitPrice"     : 499
     }
-#printing output of 1st lambda which is stored in event 
-    print(event['TransactionID'],event['ProductName'],event['Amount'])
+#printing output
+    print(pName)
+    print(qty)
+    print(amt)
+    print("--------")
+   #printing output of 1st lambda which is stored in event 
+   #print(event['TransactionID'],event['ProductName'],event['Amount'])
     
     
