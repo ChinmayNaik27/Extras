@@ -1,0 +1,46 @@
+#codes of lambda function , output of 1st lambda is given as input to another (2nd) lambda using step function
+
+
+#1st Lambda code:
+
+import json
+import uuid
+ 
+def lambda_handler(event, context):
+    #1 Read the input parameters
+    productName = 'NEWPROD'
+    quantity    = 70
+    unitPrice   = 35566.9
+ 
+    #2 Generate the Order Transaction ID
+    transactionId   = str(uuid.uuid1())
+ 
+    #3 Implement Business Logic
+    amount      = quantity * unitPrice
+ 
+    #4 Format and return the result
+    return {
+        'TransactionID' :   transactionId,
+        'ProductName'   :   productName,
+        'Amount'        :   amount
+    }
+
+#2nd lambda code:
+import json
+import boto3
+ 
+# Define the client to interact with AWS Lambda
+
+def lambda_handler(event,context):
+ 
+    # Define the input parameters that will be passed
+    # on to the child function
+    inputParams = {
+        "ProductName"   : "iPhone SE",
+        "Quantity"      : 2,
+        "UnitPrice"     : 499
+    }
+#printing output of 1st lambda which is stored in event 
+    print(event['TransactionID'],event['ProductName'],event['Amount'])
+    
+    
