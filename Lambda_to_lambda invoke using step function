@@ -1,0 +1,17 @@
+# code to invoke 2nd aws Lambda functionsby input from 1st lambda using step function
+
+{
+  "StartAt": "Lambda Invoke",
+  "States": {
+    "Lambda Invoke": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:ap-south-1:555279661067:function:function1",
+      "Next": "Lambda Invoke (2)"
+    },
+    "Lambda Invoke (2)": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:ap-south-1:555279661067:function:function2",
+      "End": true
+    }
+  }
+}
