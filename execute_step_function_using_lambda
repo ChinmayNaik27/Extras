@@ -1,4 +1,4 @@
-#aws lambda code to execute step function through lambda
+#aws lambda code to execute step function through lambda (execute step function using lambda)
 #on execution of this lambda we execute step fuction
 import json
 import boto3
