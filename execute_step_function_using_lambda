@@ -9,7 +9,15 @@ def lambda_handler(event, context):
     stepfunctions=boto3.client("stepfunctions")
     #Executing step function by giving step machine arn and step machine name
     stepfunctions.start_execution(stateMachineArn="arn:aws:states:ap-south-1:611072831785:stateMachine:twolambdatrigger",
-                    name"twolambdatrigger")#,input="",traceHeader="")
+                    name="twolambdatrigger")#,input="",traceHeader="")
+                    
+    #to execute statemachine multiple times
+    #way1:
+    #stepfunctions.start_execution(stateMachineArn="arn:aws:states:ap-south-1:611072831785:stateMachine:twolambdatrigger")#,input="",traceHeader="")
+    #or way2:
+    #stname=uuid.uuid1()
+    # stepfunctions.start_execution(stateMachineArn="arn:aws:states:ap-south-1:611072831785:stateMachine:twolambdatrigger",
+                    name=stname)#,input="",traceHeader="")
     return {
         'statusCode': 200,
         'body': json.dumps('Hello from Lambda!')
