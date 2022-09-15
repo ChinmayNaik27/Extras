@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     #way1:
     #stepfunctions.start_execution(stateMachineArn="arn:aws:states:ap-south-1:611072831785:stateMachine:twolambdatrigger")#,input="",traceHeader="")
     #or way2:
-    #stname=uuid.uuid1()
+    #stname=str(uuid.uuid1())
     # stepfunctions.start_execution(stateMachineArn="arn:aws:states:ap-south-1:611072831785:stateMachine:twolambdatrigger",
                     name=stname)#,input="",traceHeader="")
     return {
