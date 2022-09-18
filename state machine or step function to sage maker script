@@ -1,0 +1,27 @@
+#state machine or step function to sage maker script
+
+{
+  "Comment": "A description of my state machine",
+  "StartAt": "SageMaker CreateProcessingJob",
+  "States": {
+    "SageMaker CreateProcessingJob": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sagemaker:createProcessingJob",
+      "Parameters": {
+        "AppSpecification": {
+          "ImageUri": "179613068742.dkr.ecr.ap-south-1.amazonaws.com/projectsagemaker:latest"
+        },
+        "ProcessingResources": {
+          "ClusterConfig": {
+            "InstanceCount": 1,
+            "InstanceType": "ml.t3.medium",
+            "VolumeSizeInGB": 10
+          }
+        },
+        "RoleArn": "arn:aws:iam::179613068742:role/SageMakerRole",
+        "ProcessingJobName": "Execution1"
+      },
+      "End": true
+    }
+  }
+}
