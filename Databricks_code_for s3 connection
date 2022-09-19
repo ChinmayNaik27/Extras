@@ -1,0 +1,9 @@
+#databricks connection code:
+#link for login pg databricks https://community.cloud.databricks.com/login.html
+ACCESS_KEY = "AKIAY4RWHOEUSR2YQD8W"
+SECRET_KEY = "mIOGGlrE7aHSB4cSc3i1ESrzSo4GSlrAPSaqzsyl".replace("/","%2F")
+ENCODED_SECRET_KEY = urllib.parse.quote(SECRET_KEY, "")
+AWS_BUCKET_NAME = "chinmay2022/demo1/"
+MOUNT_NAME = "mys3data10"     #change name for each execution
+dbutils.fs.mount("s3a://%s:%s@%s" % (ACCESS_KEY, ENCODED_SECRET_KEY, AWS_BUCKET_NAME), "/mnt/%s" % MOUNT_NAME)
+display(dbutils.fs.ls("/mnt/mys3data10"))  #chanage name for each execution
